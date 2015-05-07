@@ -1,15 +1,28 @@
 'use strict';
 
-angular.module('myApp.view3', ['ngRoute', 'ngAnimate'])
+var view3 = angular.module('myApp.view3', ['ngRoute', 'ngAnimate', 'ngResource']);
 
-    .config(['$routeProvider', function ($routeProvider) {
+view3.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/view3', {
             templateUrl: 'view3/view3.html',
             controller: 'View3Ctrl'
         });
-    }])
+}]);
 
-    .factory('Cart', function () {
+view3.factory('Gas', ['$resource',
+    function ($resource) {
+        return $resource('http://localhost:8084/RestfulService/webapi/energycounter/gas', {}, {
+            query: {method: 'GET'}
+        });
+    }]);
+
+view3.controller('RestCtrl', ['$scope', 'Gas', function ($scope, Gas) {
+
+    $scope.gas = Gas.query();
+
+}]);
+
+view3.factory('Cart', function () {
         var items = [];
         return {
             getItems: function () {
@@ -24,9 +37,9 @@ angular.module('myApp.view3', ['ngRoute', 'ngAnimate'])
                 }, 0);
             }
         };
-    })
+});
 
-    .controller('View3Ctrl', ['$scope', '$http', 'Cart', function ($scope, $http, Cart) {
+view3.controller('View3Ctrl', ['$scope', '$http', 'Cart', function ($scope, $http, Cart) {
 
         $scope.cart = Cart;
 
@@ -34,9 +47,9 @@ angular.module('myApp.view3', ['ngRoute', 'ngAnimate'])
             $scope.articles = articlesResponse.data;
         });
 
-    }])
+}]);
 
 
-    .controller('CartCtrl', function ($scope, Cart) {
+view3.controller('CartCtrl', function ($scope, Cart) {
         $scope.cart = Cart;
     });
