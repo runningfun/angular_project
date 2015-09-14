@@ -9,18 +9,6 @@ view3.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-view3.factory('Gas', ['$resource',
-    function ($resource) {
-        return $resource('http://localhost:8084/RestfulService/webapi/energycounter/gas', {}, {
-            query: {method: 'GET'}
-        });
-    }]);
-
-view3.controller('RestCtrl', ['$scope', 'Gas', function ($scope, Gas) {
-
-    $scope.gas = Gas.query();
-
-}]);
 
 view3.factory('Cart', function () {
         var items = [];
