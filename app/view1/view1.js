@@ -25,7 +25,7 @@ view1.factory('setGas', ['$resource',
 
 view1.factory('deleteGas', ['$resource',
     function ($resource) {
-        return $resource('http://localhost:8084/RestfulService/webapi/energycounter/gas', {}, {
+        return $resource('http://localhost:8084/RestfulService/webapi/energycounter/gas/:deleteDate', {deleteDate:'@deleteDate'}, {
             remove: {method: 'DELETE'}
         });
     }]);
@@ -35,21 +35,22 @@ view1.controller('RestCtrlMongo', ['$scope', 'getGas', 'deleteGas', function ($s
   $scope.getGas = getGas.query();
 
   $scope.removeRow=function(date, value, id){
-      var gasId;
-      console.log("remove row for "+id.timestamp)
+      var deleteDate;
+      console.log("remove row for "+date)
       var index=-1;
       var comArr = eval( $scope.getGas );
       for( var i = 0; i < comArr.length; i++ ) {
           if( comArr[i].date === date && comArr[i].value === value && comArr[i]._id === id) {
               index = i;
-              gasId={_id:comArr[i]._id};
+              deleteDate=date;
               break;
           }
       }
       if( index === -1 ) {
           alert( "Something gone wrong" );
       }
-      deleteGas.remove(gasId);
+      console.log("remove id from mongo "+deleteDate)
+      deleteGas.remove({deleteDate:deleteDate});
       $scope.getGas.splice( index, 1 );
   };
 
