@@ -10,7 +10,7 @@
         </ul>
     </div>
 <div class="table-responsive">
-<table class="table table-striped" ng-controller="RestCtrlMongo">
+<table class="table table-striped" ng-controller="GasController">
 
     <thead>
     <tr>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
 
-    <tr ng-repeat="item in getGas | orderBy:'date' " >
+    <tr ng-repeat="item in getGas | orderBy:'date':true " >
         <td>{{item.date}}</td>
         <td class="numeric"> {{item.value}}</td>
         <td><input type="submit" value="Delete" class="btn btn-danger" ng-click="removeRow(item.date, item.value, item._id)"/></td>

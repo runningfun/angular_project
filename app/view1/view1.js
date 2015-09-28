@@ -1,11 +1,11 @@
 'use strict';
 
-var view1 = angular.module('myApp.view1', ['ngRoute', 'ngAnimate', 'ngResource']);
+var view1 = angular.module('myApp.gas', ['ngRoute', 'ngAnimate', 'ngResource']);
 
 view1.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.when('/view1', {
+  $routeProvider.when('/gas', {
     templateUrl: 'view1/view1.html',
-    controller: 'RestCtrlMongo'
+    controller: 'GasController'
   });
 }]);
 
@@ -30,7 +30,7 @@ view1.factory('deleteGas', ['$resource',
         });
     }]);
 
-view1.controller('RestCtrlMongo', ['$scope', 'getGas', 'deleteGas', function ($scope, getGas, deleteGas) {
+view1.controller('GasController', ['$scope', 'getGas', 'deleteGas', function ($scope, getGas, deleteGas) {
 
   $scope.getGas = getGas.query();
 
