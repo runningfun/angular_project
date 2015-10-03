@@ -6,6 +6,9 @@ view2.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/temperature', {
     templateUrl: 'view2/view2.html',
     controller: 'TemperatureController'
+  }).when('/analytics',{
+    templateUrl: 'view2/temp_humidity_charts.html',
+    controller: 'TemperatureController'
   });
 }])
 

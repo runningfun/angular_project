@@ -1,11 +1,14 @@
 'use strict';
 
-var view1 = angular.module('myApp.gas', ['ngRoute', 'ngAnimate', 'ngResource']);
+var view1 = angular.module('myApp.gas', ['ngRoute', 'ngAnimate', 'ngResource', 'googlechart']);
 
 view1.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/gas', {
     templateUrl: 'view1/view1.html',
     controller: 'GasController'
+  }).when('/analytics',{
+      templateUrl: 'view1/gas_charts.html',
+      controller: 'GasController'
   });
 }]);
 
